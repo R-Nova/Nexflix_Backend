@@ -17,7 +17,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
 # Login to ECR
@@ -29,10 +29,10 @@ jobs:
 
     - name: Docker build 
       run: |
-        docker build -t netflix_backend:latest .
+        docker build -t netflix-backend:latest .
 
     - name: Docker push
       run: |
-        docker tag netflix_backend:latest 060276830770.dkr.ecr.us-east-2.amazonaws.com/movie-backend:v${GITHUB_RUN_NUMBER}
-        docker push 060276830770.dkr.ecr.us-east-2.amazonaws.com/movie-backend:v${GITHUB_RUN_NUMBER}
+        docker tag netflix-backend:latest 423716046426.dkr.ecr.us-east-1.amazonaws.com/netflix-backend:v${GITHUB_RUN_NUMBER}
+        docker push 423716046426.dkr.ecr.us-east-1.amazonaws.com/netflix-backend:v${GITHUB_RUN_NUMBER}
 
